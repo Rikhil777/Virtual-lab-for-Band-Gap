@@ -1,0 +1,687 @@
+<html>
+
+<head>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/javascript.js" type="text/javascript"></script>
+    <script src="js/graph.ob.js"></script>
+    <script src="js/graph_use.ob.js"></script>
+    <script src="js/graph_use2.ob.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
+    <title>Energy Band Gap Simulation</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Dosis:700);
+        .slider {
+            -webkit-appearance: none;
+            width: 200px;
+            height: 15px;
+            border-radius: 5px;
+            background: blueviolet;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div style="text-align: center;display: none">X : <span id="mouseX" style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</span> Y: <span id="mouseY" style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</span>
+    </div>
+    <div class="container-fluid mt-4" style="height: 105vh;">
+        <h2 class="text-center  p-2 text-white" style="border-radius: 10px;background-color:#634380;color:white;margin: -20px 5px 0 5px ;font-weight: bold">ENERGY BAND GAP SIMULATION</h2>
+        <div class="row ml-1 mt-2 mb-5" style="justify-content: left;">
+
+            <div class="col-xs-4 ml-3 mt">
+                <div class="row  mb-1 ">
+                    <a href="#" style="text-decoration: none;color: white" data-target="#login" data-toggle="modal">
+                <button id="btn_main" style="width: 223px;background-color: #ca2222;font-weight: bold;"   vlab-action="STOP_SIMULATION" class="btn btn-danger mr-1 " onclick="main()">
+                    ENABLE POWER</button></a>
+                    <div class="modal " id="login" style="width: 500px;margin: 0 0 0 435px">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary text-white">
+                                    <h6>Among the following graphs which graph is plotted for semiconductors in Energy Band Gap Experiment?</h6>
+                                    <button class="close" data-dismiss="modal">
+                                    <i class="fa fa-window-close text-white">x</i>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="image/graph.png" style="width: 440px;height: 300px">
+                                    <button class="btn btn-primary btn-sm mt-3 ml-3" onclick="cl1()">Image 1</button>
+                                    <button class="btn btn-primary btn-sm  mt-3" onclick="cl2()">Image 2</button>
+                                    <button class="btn btn-primary btn-sm  mt-3" onclick="cl3()">Image 3</button>
+                                    <button class="btn btn-primary btn-sm  mt-3" onclick="cl4()">Image 4</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="btn_main2" style="width: 223px;display: none;font-weight: bold;background-color: #4CAF50" vlab-action="START_SIMULATION" class="btn btn-success" onclick="main2()">DISABLE POWER</button>
+
+                </div>
+                <div class="row mb-1">
+                    <button id="container" style="width: 223px;cursor: not-allowed" disabled vlab-action="DRAW_TWO_WAY_KEY" class="btn btn-warning" onclick="cont()">Place Container</button>
+                </div>
+                <div class="row">
+
+                    <button id="pndiode" style="width: 110px;cursor: not-allowed" disabled vlab-action="DRAW_RESISTOR" class="btn btn-primary mr-1">P-N Diode</button>
+
+                    <button id="battery" style="width: 110px;cursor: not-allowed" disabled vlab-action="DRAW_CELL" class="btn btn-primary">Battery</button>
+                </div>
+                <div class="row mt-1 mb-1">
+
+                    <button id="ammeter" style="width: 110px;cursor: not-allowed" disabled vlab-action="DRAW_GALVANOMETER" class="btn btn-primary mr-1">Ammeter</button>
+
+                    <button id="voltmeter" style="width: 110px;cursor: not-allowed" disabled vlab-action="DRAW_POTENTIOMETER" class="btn btn-primary">Voltmeter</button>
+
+                </div>
+                <div class="row mb-1">
+
+                    <button id="point" style="width: 110px;cursor: not-allowed" disabled vlab-action="DRAW_POINT" class="btn btn-primary mr-1"> Point</button>
+
+                    <button id="wires" style="width: 110px;cursor: not-allowed" disabled vlab-action="MAKE_CONNECTION" class="btn btn-primary" onclick="connect_wire()"> Connect</button>
+
+                </div>
+                <div class="row mb-1">
+
+                    <button id="thermometer" style="width: 223px;cursor: not-allowed" disabled vlab-action="DRAW_TAPKEY" class="btn btn-warning">Place Thermometer</button>
+
+                </div>
+
+                <div class="row mb-1">
+
+                    <button id="undo" style="width: 110px;cursor: not-allowed" disabled vlab-action="UNDO" class="btn btn-primary mr-1">Undo</button>
+
+                    <button id="redo" style="width: 110px;cursor: not-allowed" disabled vlab-action="REDO" class="btn btn-primary">Redo</button>
+                </div>
+                <div class="row mb-1">
+
+                    <button id="reset" style="width: 223px;cursor: not-allowed" disabled vlab-action="RESET" class="btn btn-danger">Reset</button>
+
+                </div>
+                <div class="row mt-2 " style="height: max-content;">
+                    <div class=" pl-0 pr-0 " style="border: 0px inset green;width: 224px; box-shadow: 0px 0px 20px #bbb; background-color: white;">
+                        <h6 class="text-center mb-0" style="background-color: black;border-radius: 6px;width: 224px; color: white; box-shadow: 0px 3px 20px #bbb">Message</h6>
+                        <div id="terminal" style="width: 224px">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-xs-6 ml-4" style="border: 5px solid grey;border-radius: 10px; inset green; box-shadow: 0px 0px 20px #bbb;">
+                <img id="scream" src="image/abhay.svg " style="display: none">
+                <img id="therma" src="image/handi.jpg" style="display: none">
+                <img id="img_therma" src="image/therma.svg" style="display: none">
+                <canvas id="myCanvas" style="background-image: url(image/back.svg); background-size: 100px 100px;">
+
+            </canvas>
+            </div>
+
+            <div class="col-xs-2 ml-2">
+                <div class="row " style="height: max-content;">
+                    <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                        <table style="border: none;text-align: center;width: 200px;margin: 0 0 20px 0">
+                            <tr>
+                                <td class="p-2" style="border: none">
+                                    <select id="select_volt" class="p-1" style="border-radius: 5px;outline: none;width: 150px">
+                                    <option>Select Voltage </option>
+                                    <option>01</option>
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                </select>
+                                </td>
+                                <td class="p-2" style="border: none">
+                                    <button class="btn btn-primary disabled" disabled id="calc_volt" onclick="cal_volt()">Click</button>
+                                </td>
+                            </tr>
+                            <tr id="vlted" style="display: none">
+                                <td class="" style="border: none">
+                                    <h6>Selected Voltage is </h6>
+                                </td>
+                                <td class="" style="border: none">
+                                    <h6><span id="voltage" style="color: red;font-weight: bold"></span> Volt</h6>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-2" style="height: max-content;">
+                    <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                        <table style="border: none;text-align: center;width: 260px;margin: 0 0 20px 20px">
+                            <tr>
+                                <td style="border: none" class="pt-2 pr-2 pb-2">
+                                    <h6>Slide to choose Temprature</h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none">
+                                    <span style="font-weight: bold">0</span>
+                                    <input type="range" min="1" max="100" step="1" value="90" class="slider" id="myRange">
+                                    <span style="font-weight: bold">100</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none" class="pt-2 pr-2">
+                                    <h6>Selected Temprature is&nbsp;<span id="temp_slider" style="font-weight: bold;color: red"></span>&nbsp;<sup>o</sup>C</h6>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-2" style="height: max-content;">
+                    <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                        <table style="border: none;text-align: center;width: 260px;margin: 0 0 20px 20px">
+                            <tr>
+                                <td style="border: none" class="pt-2 pr-2 pb-2">
+                                    <h6>Get Reverse Saturation Current</h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none">
+                                    <button type="button" class="btn btn-primary disabled" disabled id="current" onclick="rev_cur()">Find Here</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none" class="pt-2 pr-2">
+                                    <<<<<<< HEAD <<<<<<< HEAD <h6>Respected value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
+                                        =======
+                                        <h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
+                                        >>>>>>> 86c9944befd7438d64fffc1a76af1db576782d1c =======
+                                        <h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
+                                        >>>>>>> b6df246e59a1e509091beb42bae39dc3802dd900
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-2" style="height: max-content;">
+                    <div style="margin: 0 10px 0 5px;border-radius: 10px">
+                        <table style="border: none;text-align: center;width: 285px;margin: 0 0 15px 10px">
+                            <tr>
+                                <td style="border: none" class=" pr-2 ">
+                                    <h5 style="background-color: lightpink;padding: 5px;border-radius: 6px">FORMULAS</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none" class=" pr-2 pb-2">
+                                    <img src="image/formula.png" style="border-radius: 10px;width: 260px">
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div style="margin: 0 5px 0 5px;border-radius: 20px">
+            <h4 class="bg-primary" style="color: white;border-radius: 8px;padding: 7px;font-family:
+ Arial, Helvetica, sans-serif;text-align: center">
+                TABLE : OBSERVATIONS</h4>
+            <table style="width: 670px">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+
+                        <th style="padding: 5px">Temperature(<sup>o</sup>C)
+                        </th>
+                        <th style="padding: 5px">Current I<sub>s</sub> (&micro;A)
+                        </th>
+                        <th style="padding: 5px">Temperature(<sup>o</sup>K)
+                        </th>
+                        <th style="padding: 5px">10<sup>3</sup>/T
+                        </th>
+                        <th style="padding: 5px">Log<sub>10</sub> I<sub>s</sub>
+                        </th>
+
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>01</th>
+                        <td>
+                            <input type="number" id="temp1" style="width: 110px">
+                        </td>
+                        <td>
+                            <input type="number" id="cur1" style="width: 110px">
+                        </td>
+                        <td id="t1"></td>
+                        <td id="i1"></td>
+
+                        <td id="lg1"></td>
+
+                    </tr>
+                    <tr>
+                        <th>02</th>
+                        <td>
+                            <input type="number" id="temp2" style="width: 110px">
+                        </td>
+                        <td>
+                            <input type="number" id="cur2" style="width: 110px">
+                        </td>
+                        <td id="t2"></td>
+                        <td id="i2"></td>
+
+                        <td id="lg2"></td>
+
+                    </tr>
+                    <tr>
+                        <th>03</th>
+                        <td>
+                            <input type="number" id="temp3" style="width: 110px">
+                        </td>
+                        <td>
+                            <input type="number" id="cur3" style="width: 110px">
+                        </td>
+                        <td id="t3"></td>
+                        <td id="i3"></td>
+
+                        <td id="lg3"></td>
+
+                    </tr>
+                    <tr>
+                        <th>04</th>
+                        <td>
+                            <input type="number" id="temp4" style="width: 110px">
+                        </td>
+                        <td>
+                            <input type="number" id="cur4" style="width: 110px">
+                        </td>
+                        <td id="t4"></td>
+                        <td id="i4"></td>
+
+                        <td id="lg4"></td>
+
+                    </tr>
+                    <tr>
+                        <th>05</th>
+                        <td>
+                            <input type="number" id="temp5" style="width: 110px">
+                        </td>
+                        <td>
+                            <input type="number" id="cur5" style="width: 110px">
+                        </td>
+                        <td id="t5"></td>
+                        <td id="i5"></td>
+
+                        <td id="lg5"></td>
+
+                    </tr>
+                    <tr>
+                        <th>06</th>
+                        <td>
+                            <input type="number" id="temp6" style="width: 110px">
+                        </td>
+                        <td>
+                            <input type="number" id="cur6" style="width: 110px">
+                        </td>
+                        <td id="t6"></td>
+                        <td id="i6"></td>
+
+                        <td id="lg6"></td>
+
+                    </tr>
+                    <tr>
+                        <th>07</th>
+                        <td>
+                            <input type="number" id="temp7" style="width: 110px">
+                        </td>
+                        <td>
+                            <input type="number" id="cur7" style="width: 110px">
+                        </td>
+                        <td id="t7"></td>
+                        <td id="i7"></td>
+
+                        <td id="lg7"></td>
+
+                    </tr>
+                    <tr>
+                        <th>08</th>
+                        <td>
+                            <input type="number" id="temp8" style="width: 110px">
+                        </td>
+                        <td>
+                            <input type="number" id="cur8" style="width: 110px">
+                        </td>
+                        <td id="t8"></td>
+                        <td id="i8"></td>
+
+                        <td id="lg8"></td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+            <br>
+
+        </div>
+        <br>
+
+        <div>
+            <table style="margin: -330px 0 0 690px" style="border: none">
+                <tr>
+                    <td>
+                        <div id="l1" style="width:615px;height:277px"></div>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <button class="btn btn-primary" style="width: 200px;margin: 10px 0 0 250px" onclick="calculate_table()">Calculate Data</button>
+        <button class="btn btn-primary disabled" style="margin: 10px 0 0 450px;width: 200px;cursor: not-allowed" id="graph" onclick="draw_graph()" disabled>Draw Graph</button>
+
+        <br>
+        <br>
+        <div>
+            <h6 class="text-center">NOTE : Enter value of X coordinate and Y coordinate seperated with comma( , )</h6>
+            <table style="border: none;text-align: center;width:100%;
+        background-color: lightpink;border-radius: 8px;">
+                <tr>
+
+                    <td style="border: none" class="p-3">
+                        <span>
+                    <input type="text" style="width:200px;" id="ip1" placeholder="Enter First Coordinate">
+                </span>
+                        <span>
+                    &nbsp;&nbsp;<input type="text" style="width:200px;" id="ip2" placeholder="Enter Second Coordinate">
+                </span>
+                        <span>&nbsp;&nbsp;
+                    <button class="btn btn-primary disabled" id="slope_button" style="cursor: not-allowed" disabled onclick="slopy()">Find Slope</button>
+                </span>&nbsp;&nbsp;&nbsp;
+                        <span id="slp" style="display: none">
+                    Calculated Slope is&nbsp;<span id="ip3" style="font-weight: bold;color: red;padding: 5px;"></span>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <h6 class="text-center">NOTE : Enter value of Slope calculated above in the below box </h6>
+            <table style="border: none;text-align: center;width:100%;
+        background-color: lightpink;border-radius: 8px;">
+                <tr>
+
+                    <td style="border: none" class="pt-3 pb-3 pl-3">
+                        <span>Energy Band Gap (E<sub>g</sub>) =</span>&nbsp;
+                        <input type="text" style="width:100px;" id="slp_value" placeholder="Enter Slope">/5.04 &nbsp;
+                        <button class="btn btn-primary disabled" id="eg_button" style="cursor: not-allowed" disabled onclick="cal_eg()">Calculate</button>
+                    </td>
+                    <td style="border: none;display: none" id="hide_eg" class="pt-3 pb-3 pr-3">
+                        <h6>Observed Energy Band Gap is&nbsp;<span id="eg_value" style="font-weight: bold;color: red;padding: 5px;"></span></h6>
+                    </td>
+
+                </tr>
+
+            </table>
+        </div>
+        <hr>
+        <p style="bottom:0;float:right;font-size:6px">&copy;Abhay Gupta</p>
+        <script>
+            function cal_volt() {
+                var e1 = document.getElementById("select_volt");
+                var user1 = e1.options[e1.selectedIndex].text;
+
+                if (user1 == 'Select Voltage') {
+                    alert('Please select the given voltage value ');
+                } else {
+                    document.getElementById('voltage').innerHTML = user1;
+                    vlted.style.display = "";
+                    document.getElementById('current').disabled = false;
+                    document.getElementById('current').style.cursor = "pointer";
+                    document.getElementById('current').classList.remove("disabled");
+                }
+
+
+            }
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("temp_slider");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+            }
+
+            function rev_cur() {
+                var slider_val = Number(document.getElementById("myRange").value) + 273;
+                //var output = document.getElementById("temp_slider");
+                var logi = (5.3 - (5.036 * 0.266 * 1000) / slider_val);
+                var i_sat = Math.pow(10, logi);
+                document.getElementById('sat_cur').innerHTML = i_sat.toFixed(3);
+
+            }
+
+            function calculate_table() {
+
+
+                var temp1 = document.getElementById('temp1').value;
+                var temp2 = document.getElementById('temp2').value;
+                var temp3 = document.getElementById('temp3').value;
+                var temp4 = document.getElementById('temp4').value;
+                var temp5 = document.getElementById('temp5').value;
+                var temp6 = document.getElementById('temp6').value;
+                var temp7 = document.getElementById('temp7').value;
+                var temp8 = document.getElementById('temp8').value;
+
+                var cur1 = document.getElementById('cur1').value;
+                var cur2 = document.getElementById('cur2').value;
+                var cur3 = document.getElementById('cur3').value;
+                var cur4 = document.getElementById('cur4').value;
+                var cur5 = document.getElementById('cur5').value;
+                var cur6 = document.getElementById('cur6').value;
+                var cur7 = document.getElementById('cur7').value;
+                var cur8 = document.getElementById('cur8').value;
+
+                if (temp1 == '' || temp2 == '' || temp3 == '' || temp4 == '' || temp5 == '' || temp6 == '' ||
+                    temp7 == '' || temp8 == '' || cur1 == '' || cur2 == '' ||
+                    cur3 == '' || cur4 == '' || cur5 == '' || cur6 == '' || cur7 == '' || cur8 == '') {
+
+                    alert('Please insert data in all required fields... ');
+                } else {
+
+                    document.getElementById('graph').disabled = false;
+                    document.getElementById('graph').style.cursor = "pointer";
+                    document.getElementById('graph').classList.remove("disabled");
+
+                    document.getElementById('t1').innerHTML = parseInt(temp1) + 273;
+                    document.getElementById('t2').innerHTML = parseInt(temp2) + 273;
+                    document.getElementById('t3').innerHTML = parseInt(temp3) + 273;
+                    document.getElementById('t4').innerHTML = parseInt(temp4) + 273;
+                    document.getElementById('t5').innerHTML = parseInt(temp5) + 273;
+                    document.getElementById('t6').innerHTML = parseInt(temp6) + 273;
+                    document.getElementById('t7').innerHTML = parseInt(temp7) + 273;
+                    document.getElementById('t8').innerHTML = parseInt(temp8) + 273;
+
+
+                    var x1 = Number(1000 / (parseInt(temp1) + 273)).toFixed(2);
+                    var x2 = Number(1000 / (parseInt(temp2) + 273)).toFixed(2);
+                    var x3 = Number(1000 / (parseInt(temp3) + 273)).toFixed(2);
+                    var x4 = Number(1000 / (parseInt(temp4) + 273)).toFixed(2);
+                    var x5 = Number(1000 / (parseInt(temp5) + 273)).toFixed(2);
+                    var x6 = Number(1000 / (parseInt(temp6) + 273)).toFixed(2);
+                    var x7 = Number(1000 / (parseInt(temp7) + 273)).toFixed(2);
+                    var x8 = Number(1000 / (parseInt(temp8) + 273)).toFixed(2);
+
+                    document.getElementById('i1').innerHTML = x1;
+                    document.getElementById('i2').innerHTML = x2;
+                    document.getElementById('i3').innerHTML = x3;
+                    document.getElementById('i4').innerHTML = x4;
+                    document.getElementById('i5').innerHTML = x5;
+                    document.getElementById('i6').innerHTML = x6;
+                    document.getElementById('i7').innerHTML = x7;
+                    document.getElementById('i8').innerHTML = x8;
+
+                    var y1 = Math.log10(cur1).toFixed(3);
+                    var y2 = Math.log10(cur2).toFixed(3);
+                    var y3 = Math.log10(cur3).toFixed(3);
+                    var y4 = Math.log10(cur4).toFixed(3);
+                    var y5 = Math.log10(cur5).toFixed(3);
+                    var y6 = Math.log10(cur6).toFixed(3);
+                    var y7 = Math.log10(cur7).toFixed(3);
+                    var y8 = Math.log10(cur8).toFixed(3);
+
+                    document.getElementById('lg1').innerHTML = y1;
+                    document.getElementById('lg2').innerHTML = y2;
+                    document.getElementById('lg3').innerHTML = y3;
+                    document.getElementById('lg4').innerHTML = y4;
+                    document.getElementById('lg5').innerHTML = y5;
+                    document.getElementById('lg6').innerHTML = y6;
+                    document.getElementById('lg7').innerHTML = y7;
+                    document.getElementById('lg8').innerHTML = y8;
+
+                }
+
+            }
+
+            //Graph code
+            function draw_graph() {
+
+                document.getElementById('slope_button').disabled = false;
+                document.getElementById('slope_button').style.cursor = "pointer";
+                document.getElementById('slope_button').classList.remove("disabled");
+
+                var temp1 = document.getElementById('temp1').value;
+                var temp2 = document.getElementById('temp2').value;
+                var temp3 = document.getElementById('temp3').value;
+                var temp4 = document.getElementById('temp4').value;
+                var temp5 = document.getElementById('temp5').value;
+                var temp6 = document.getElementById('temp6').value;
+                var temp7 = document.getElementById('temp7').value;
+                var temp8 = document.getElementById('temp8').value;
+
+                var cur1 = document.getElementById('cur1').value;
+                var cur2 = document.getElementById('cur2').value;
+                var cur3 = document.getElementById('cur3').value;
+                var cur4 = document.getElementById('cur4').value;
+                var cur5 = document.getElementById('cur5').value;
+                var cur6 = document.getElementById('cur6').value;
+                var cur7 = document.getElementById('cur7').value;
+                var cur8 = document.getElementById('cur8').value;
+
+                var pnt = [];
+                pnt.push({
+                    x: Number(1000 / (parseInt(temp1) + 273)),
+                    y: Math.log10(cur1)
+                });
+                pnt.push({
+                    x: Number(1000 / (parseInt(temp2) + 273)),
+                    y: Math.log10(cur2)
+                });
+                pnt.push({
+                    x: Number(1000 / (parseInt(temp3) + 273)),
+                    y: Math.log10(cur3)
+                });
+                pnt.push({
+                    x: Number(1000 / (parseInt(temp4) + 273)),
+                    y: Math.log10(cur4)
+                });
+                pnt.push({
+                    x: Number(1000 / (parseInt(temp5) + 273)),
+                    y: Math.log10(cur5)
+                });
+                pnt.push({
+                    x: Number(1000 / (parseInt(temp6) + 273)),
+                    y: Math.log10(cur6)
+                });
+                pnt.push({
+                    x: Number(1000 / (parseInt(temp7) + 273)),
+                    y: Math.log10(cur7)
+                });
+                pnt.push({
+                    x: Number(1000 / (parseInt(temp8) + 273)),
+                    y: Math.log10(cur8)
+                });
+                drawgraph("l1", pnt, "1000/T", "Log Is");
+
+            }
+
+            function slopy() {
+
+                var x = document.getElementById("ip1").value;
+                var i = x.indexOf(",");
+                var real1 = parseFloat(x.substring(x, i));
+                var img1 = parseFloat(x.substring(i + 1, x.length));
+
+                var y = document.getElementById("ip2").value;
+                var j = y.indexOf(",");
+                var real2 = parseFloat(y.substring(y, j));
+                var img2 = parseFloat(y.substring(j + 1, y.length));
+
+
+                if (x === '' || y === '') {
+
+                    alert('Please insert data in all required fields... ');
+                } else {
+                    var real = real2 - real1;
+                    var img = img2 - img1;
+                    document.getElementById("ip3").innerHTML = (real / img).toFixed(3);
+
+                    slp.style.display = "";
+
+                    document.getElementById('eg_button').disabled = false;
+                    document.getElementById('eg_button').style.cursor = "pointer";
+                    document.getElementById('eg_button').classList.remove("disabled");
+                }
+
+
+
+            }
+
+            function cal_eg() {
+                var res = document.getElementById("slp_value").value;
+                var eg = res / 5.04;
+                if (res == '') {
+                    alert('Please enter below the slope value to proceed...');
+                } else {
+                    document.getElementById("eg_value").innerHTML = eg.toFixed(3);
+                    document.getElementById('hide_eg').style.display = '';
+                }
+            }
+        </script>
+
+        <script src="../assets/js/iframeResize.js"></script>
+</body>
+
+</html>
