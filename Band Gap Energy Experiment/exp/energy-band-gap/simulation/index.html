@@ -20,7 +20,7 @@
             width: 200px;
             height: 15px;
             border-radius: 5px;
-            background: blueviolet;
+            background: rgb(168, 99, 232);
             outline: none;
             opacity: 0.7;
             -webkit-transition: .2s;
@@ -48,6 +48,7 @@
             background: #4CAF50;
             cursor: pointer;
         }
+       
     </style>
 
 
@@ -57,13 +58,23 @@
     <div style="text-align: center;display: none">X : <span id="mouseX" style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</span> Y: <span id="mouseY" style="border: 1px solid black; padding: 5px 20px; display: inline-block;">0</span>
     </div>
     <div class="container-fluid mt-4" style="height: 105vh;">
-        <h2 class="text-center  p-2 text-white" style="border-radius: 10px;background-color:#634380;color:white;margin: -20px 5px 0 5px ;font-weight: bold">ENERGY BAND GAP SIMULATION</h2>
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/images/snulogo.jpg" alt="Logo" width="200" height="75" class="d-inline-block align-top">
+            </a>
+    
+            <div class="mx-auto">
+                <h2 class="text-center text-primary"><b>ENERGY BAND GAP SIMULATION</b></h2>
+            </div>
+    
+        </nav>
         <div class="row ml-1 mt-2 mb-5" style="justify-content: left;">
 
             <div class="col-xs-4 ml-3 mt">
                 <div class="row  mb-1 ">
                     <a href="#" style="text-decoration: none;color: white" data-target="#login" data-toggle="modal">
-                <button id="btn_main" style="width: 223px;background-color: #ca2222;font-weight: bold;"   vlab-action="STOP_SIMULATION" class="btn btn-danger mr-1 " onclick="main()">
+                <button id="btn_main" style="width: 223px;background-color: #22ca68;font-weight: bold;"   vlab-action="STOP_SIMULATION" class="btn btn-danger mr-1 " onclick="main()">
                     ENABLE POWER</button></a>
                     <div class="modal " id="login" style="width: 500px;margin: 0 0 0 435px">
                         <div class="modal-dialog modal-lg">
@@ -85,7 +96,7 @@
                         </div>
                     </div>
 
-                    <button id="btn_main2" style="width: 223px;display: none;font-weight: bold;background-color: #4CAF50" vlab-action="START_SIMULATION" class="btn btn-success" onclick="main2()">DISABLE POWER</button>
+                    <button id="btn_main2" style="width: 223px;display: none;font-weight: bold;background-color: #af4c4c" vlab-action="START_SIMULATION" class="btn btn-success" onclick="main2()">DISABLE POWER</button>
 
                 </div>
                 <div class="row mb-1">
@@ -151,7 +162,7 @@
 
             <div class="col-xs-2 ml-2">
                 <div class="row " style="height: max-content;">
-                    <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                    <div style="background-color: rgb(182, 255, 186);margin: 0 10px 0 15px;border-radius: 10px">
                         <table style="border: none;text-align: center;width: 200px;margin: 0 0 20px 0">
                             <tr>
                                 <td class="p-2" style="border: none">
@@ -180,7 +191,7 @@
                     </div>
                 </div>
                 <div class="row mt-2" style="height: max-content;">
-                    <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                    <div style="background-color: rgb(182, 255, 186);margin: 0 10px 0 15px;border-radius: 10px">
                         <table style="border: none;text-align: center;width: 260px;margin: 0 0 20px 20px">
                             <tr>
                                 <td style="border: none" class="pt-2 pr-2 pb-2">
@@ -203,7 +214,7 @@
                     </div>
                 </div>
                 <div class="row mt-2" style="height: max-content;">
-                    <div style="background-color: lightpink;margin: 0 10px 0 15px;border-radius: 10px">
+                    <div style="background-color: rgb(182, 255, 186);margin: 0 10px 0 15px;border-radius: 10px">
                         <table style="border: none;text-align: center;width: 260px;margin: 0 0 20px 20px">
                             <tr>
                                 <td style="border: none" class="pt-2 pr-2 pb-2">
@@ -233,7 +244,7 @@
                         <table style="border: none;text-align: center;width: 285px;margin: 0 0 15px 10px">
                             <tr>
                                 <td style="border: none" class=" pr-2 ">
-                                    <h5 style="background-color: lightpink;padding: 5px;border-radius: 6px">FORMULAS</h5>
+                                    <h5 style="background-color: rgb(182, 255, 186);padding: 5px;border-radius: 6px">FORMULAS</h5>
                                 </td>
                             </tr>
                             <tr>
@@ -431,7 +442,7 @@
                     <button class="btn btn-primary disabled" id="slope_button" style="cursor: not-allowed" disabled onclick="slopy()">Find Slope</button>
                 </span>&nbsp;&nbsp;&nbsp;
                         <span id="slp" style="display: none">
-                    Calculated Slope is&nbsp;<span id="ip3" style="font-weight: bold;color: red;padding: 5px;"></span>
+                    Calculated Slope is&nbsp;<span id="ip3" style="font-weight: bold;color: rgb(0, 204, 255);padding: 5px;"></span>
                         </span>
                     </td>
                 </tr>
@@ -441,7 +452,7 @@
         <div>
             <h6 class="text-center">NOTE : Enter value of Slope calculated above in the below box </h6>
             <table style="border: none;text-align: center;width:100%;
-        background-color: lightpink;border-radius: 8px;">
+                 background-color: rgb(182, 255, 191);border-radius: 8px;">
                 <tr>
 
                     <td style="border: none" class="pt-3 pb-3 pl-3">
@@ -450,7 +461,7 @@
                         <button class="btn btn-primary disabled" id="eg_button" style="cursor: not-allowed" disabled onclick="cal_eg()">Calculate</button>
                     </td>
                     <td style="border: none;display: none" id="hide_eg" class="pt-3 pb-3 pr-3">
-                        <h6>Observed Energy Band Gap is&nbsp;<span id="eg_value" style="font-weight: bold;color: red;padding: 5px;"></span></h6>
+                        <h6>Observed Energy Band Gap is&nbsp;<span id="eg_value" style="font-weight: bold;color: rgb(0, 217, 255);padding: 5px;"></span></h6>
                     </td>
 
                 </tr>
@@ -458,7 +469,7 @@
             </table>
         </div>
         <hr>
-        <p style="bottom:0;float:right;font-size:6px">&copy;Abhay Gupta</p>
+        
         <script>
             function cal_volt() {
                 var e1 = document.getElementById("select_volt");
@@ -684,4 +695,4 @@
         <script src="../assets/js/iframeResize.js"></script>
 </body>
 
-</html>
+</html
