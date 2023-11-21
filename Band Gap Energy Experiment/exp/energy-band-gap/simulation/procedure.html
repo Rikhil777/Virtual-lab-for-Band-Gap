@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedure</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        h4 {
+            color: #004085;
+            margin-top: 20px;
+        }
+
+        p,
+        ul,
+        table {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style-type: square;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .procedure-section {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .observation-table {
+            margin-top: 20px;
+        }
+
+        .calculation-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Band Gap of Semiconductor</h1>
+    <div class="procedure-section">
+        <h4>Aim</h4>
+        <p>To determine the band gap energy of the given semiconductor by studying the variation
+            of reverse saturation current of point contact diode with temperature.
+        </p>
+        <h4>Apparatus Required:</h4>
+        <p>
+        <ul>
+            <li>Point contact diode </li>
+            <li> ammeter </li>
+            <li> Oven</li>
+            <li>thermometer </li>
+        </ul>
+        </p>
+
+        <h4>Formula</h4>
+        <p>
+            Energy Gap, E, = 2 x 0.198 x Slope of straight line from graph (in eV)
+        </p>
+        <table>
+            <tr>
+                <th>Symbol</th>
+                <th>Description</th>
+                <th>Unit</th>
+            </tr>
+            <tr>
+                <th>Eg</th>
+                <th>Energy band gap</th>
+                <th>eV</th>
+            </tr>
+            <tr>
+                <th>Is</th>
+                <th>Saturation Current</th>
+                <th>uA</th>
+            </tr>
+            <tr>
+                <th>T</th>
+                <th>Absolute Temperature</th>
+                <th>K</th>
+            </tr>
+        </table>
+       
+        <h4>Procedure</h4>
+    <p>
+        The given thermometer and reverse biased diode is immersed in the oil contained in the heater.
+        The heater is switched on. When the temperature reaches 35°C, the heater is switched off. The
+        temperature of the oil will rise by itself to 85°C and will start to cool. Record the reverse current
+        from 85°C for every 5 °C fall in temperature till temperature reduces to 45°C. A graph is drawn
+        between 10T on the x- axis and log Is on the y-axis. The slope of the straight line is determined
+        and substituted in the formula to find band gap of the given diode. Use a line fitting algorithm
+        and estimate the slope. List the R² value and error percentage.
+    </p>
+
+        <h4>Model Graph</h4>
+        <img src="./image/one.png" alt="Loading">
+        <img src="./image/two.png" alt="Loading">
+    </div>
+
+
+    <div class="calculation-section">
+        <h4>Calculation</h4>
+        <p>The slope from the graph is = </p>
+        <p>Band gap energy is = </p>
+    </div>
+</body>
+
+</html>
