@@ -57,6 +57,8 @@ body {
     cursor: text;
 }
 
+
+
 #terminal::-webkit-scrollbar {
     width: 5px;
 }
@@ -142,4 +144,6 @@ body {
         -webkit-transform: rotateX(50deg) rotateY(0deg) rotateZ(45deg) translateZ(-1em);
         transform: rotateX(50deg) rotateY(0deg) rotateZ(45deg) translateZ(-1em);
     }
+
+    
 }
