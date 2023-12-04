@@ -143,9 +143,7 @@
 
                 </div>
                 <div class="row mb-1">
-
-                    
-                    
+                    <button id="thermometer" style="width: 223px;cursor: not-allowed" disabled vlab-action="DRAW_TAPKEY" class="btn btn-warning">Place Thermometer</button>
                 </div>
 
                 <div class="row mb-1">
@@ -474,8 +472,7 @@
             <table style="border: none;text-align: center;width:100%;
                  background-color: rgb(182, 255, 191);border-radius: 8px;">
                 <tr>
-
-
+                    
 
                     <td style="border: none" class="pt-3 pb-3 pl-3">
                         <span>Energy Band Gap (E<sub>g</sub>) =</span>&nbsp;
@@ -520,7 +517,7 @@
             function rev_cur() {
                 var slider_val = Number(document.getElementById("myRange").value) + 273;
                 //var output = document.getElementById("temp_slider");
-                var logi = (5.3 - (5.036 * 0.7 * 1000) / slider_val);
+                var logi = (5.3 - (5.036 * 0.266 * 1000) / slider_val);
                 var i_sat = Math.pow(10, logi);
                 document.getElementById('sat_cur').innerHTML = i_sat.toFixed(3);
 
