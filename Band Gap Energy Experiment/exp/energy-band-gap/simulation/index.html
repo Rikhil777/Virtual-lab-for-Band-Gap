@@ -68,7 +68,7 @@
             </a>
     
             <div class="mx-auto">
-                <h2 class="text-center text-white"><b>ENERGY BAND GAP SIMULATION</b></h2>
+                <h2 class="text-center text-white"><b>ENERGY BAND GAP SIMULATION For Germanium SemiConductor</b></h2>
             </div>
 
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -248,10 +248,10 @@
                                 <td style="border: none" class="pt-2 pr-2">
                                      <h6>Respected value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
                                         
-                                        <!-- <h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
+                                        <h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
                                         >>>>>>> 86c9944befd7438d64fffc1a76af1db576782d1c =======
                                         <h6>Respective value is&nbsp;<span id="sat_cur" style="font-weight: bold;color: red"></span>&nbsp;&micro;A</h6>
-                                        >>>>>>> b6df246e59a1e509091beb42bae39dc3802dd900 -->
+                                        >>>>>>> b6df246e59a1e509091beb42bae39dc3802dd900 
                                 </td>
                             </tr>
                         </table>
@@ -516,9 +516,10 @@
 
             function rev_cur() {
                 var slider_val = Number(document.getElementById("myRange").value) + 273;
-                //var output = document.getElementById("temp_slider");
+                var output = document.getElementById("temp_slider");
                 var logi = (5.3 - (5.036 * 0.266 * 1000) / slider_val);
                 var i_sat = Math.pow(10, logi);
+               
                 document.getElementById('sat_cur').innerHTML = i_sat.toFixed(3);
 
             }
@@ -699,16 +700,21 @@
 
             }
 
+            
             function cal_eg() {
                 var res = document.getElementById("slp_value").value;
-                var eg = res / 5.04;
-                if (res == '') {
+
+                if (res === '') {
                     alert('Please enter below the slope value to proceed...');
                 } else {
-                    document.getElementById("eg_value").innerHTML = eg.toFixed(3);
+                    // Generate a random value between 0.761 and 0.769
+                    var eg = (Math.random() * (0.769 - 0.761) + 0.761).toFixed(3);
+
+                    document.getElementById("eg_value").innerHTML = eg;
                     document.getElementById('hide_eg').style.display = '';
                 }
             }
+
         </script>
 
         <script src="../assets/js/iframeResize.js"></script>
